@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ขั้นตอนการทำงานของระบบฐานข้อมูล</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #2c3e50;
+            line-height: 1.8;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(26, 54, 93, 0.2);
+        }
+
+        .header h2 {
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .section {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 35px 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid #2c5282;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-image {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .section-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-content p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .section-content p br {
+            display: block;
+            content: "";
+            margin-bottom: 2px;
+        }
+
+        .gallery-section {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 35px 40px;
+            margin-top: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .gallery-section h3 {
+            color: #1a365d;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            text-align: center;
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .header {
+                padding: 25px 20px;
+                margin-bottom: 30px;
+            }
+
+            .header h2 {
+                font-size: 1.2rem;
+            }
+
+            .section {
+                padding: 25px 20px;
+                margin-bottom: 20px;
+            }
+
+            .gallery-section {
+                padding: 25px 20px;
+            }
+
+            .gallery-section h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>เว็บนี้จัดทำขึ้นเพื่ออธิบาย ขั้นตอนการทำงานของระบบฐานข้อมูล ระบบจัดการกิจกรรม</h2>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/faculty.png" alt="ตาราง Faculty"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนนี้เป็นส่วนของตาราง faculty โดยประกอบไปด้วย Faculty_ID (เก็บรหัสของคณะ) เก็บด้วย varchar(20) และเป็น primary key
+                    <br>และ Faculty_Name (เก็บชื่อคณะ) เก็บด้วย varchar(100)
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/branch.png" alt="ตาราง Branch"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง branch โดยประกอบไปด้วย Branch_ID (เก็บรหัสของสาขา) เก็บด้วย varchar(20) และเป็น primary key
+                    <br>และ Branch_Name (เก็บชื่อสาขา) เก็บด้วย varchar(100)
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/department.png" alt="ตาราง Department"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง department โดยประกอบไปด้วย Department_ID (เก็บรหัสของแผนก) เก็บด้วย varchar(20) และเป็น primary key
+                    <br>และ Department_Name (เก็บชื่อสาขา) เก็บด้วย varchar(100)
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/activity_type.png" alt="ตาราง Activity Type"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง activity_type โดยประกอบไปด้วย Activity_Type_ID (เก็บรหัสของประเภทกิจกรรม) เก็บด้วย varchar(20) และเป็น primary key
+                    <br>และ Activity_Type_Name (เก็บชื่อของประภทกิจกรรม) เก็บด้วย varchar(100)
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/student.png" alt="ตาราง Student"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง student โดยประกอบไปด้วย Student_ID (เก็บรหัสของนักศึกษา) เก็บด้วย varchar(20) และเป็น primary key
+                    <br> Student_Name (เก็บชื่อของนักศึกษา) เก็บด้วย varchar(100)
+                    <br> Student_Email (เก็บอีเมลของนักศึกษา) เก็บด้วย varchar(100)
+                    <br>และ Student_Phone (เก็บเบอร์ของนักศึกษา) เก็บด้วย varchar(20)
+                    <br>โดยมี Faculty_ID และ Branch_ID เป็น foreign key โดยที่จะทำเป็น Referential Constraint โดยสั่งให้ อ้างอิงจากตาราง faculty(เพื่อบอกว่านักศึกษาคนนั้นๆอยู่คณะอะไร) และ branch(เพื่อบอกว่านักศึกษาคนนั้นๆอยู่สาขาอะไร) โดยบอกว่าห้ามลบข้อมูลในตารางแม่(ตารางfaculty,branch) หากยังมีข้อมูลในตารางลูก(ตารางstudent)อยู่ และให้อัพเดตข้อมูลในตารางลูกด้วย หากตารางแม่มีการแก้ไข
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/dean.png" alt="ตาราง Dean"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง dean โดยประกอบไปด้วย Dean_ID (เก็บรหัสของรองคณบดี) เก็บด้วย varchar(20) และเป็น primary key
+                    <br> Dean_Name (เก็บชื่อของรองคณบดี) เก็บด้วย varchar(100)
+                    <br>และ Dean_Email (เก็บอีเมลของรองคณบดี) เก็บด้วย varchar(100)
+                    <br>โดยมี Department_ID เป็น foreign key โดยที่จะทำเป็น Referential Constraint โดยสั่งให้ อ้างอิงจากตาราง department(เพื่อบอกว่าคณบดีอยู่แผนกอะไร) โดยบอกว่าห้ามลบข้อมูลในตารางแม่(ตารางdepartment) หากยังมีข้อมูลในตารางลูก(ตารางdean)อยู่ และให้อัพเดตข้อมูลในตารางลูกด้วย หากตารางแม่มีการแก้ไข
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/activity_head.png" alt="ตาราง Activity Head"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง activity_head โดยประกอบไปด้วย Activity_Head_ID (เก็บรหัสของหัวหน้ากิจกรรม) เก็บด้วย varchar(20) และเป็น primary key
+                    <br> Activity_Head_Name (เก็บชื่อของหัวหน้ากิจกรรม) เก็บด้วย varchar(100)
+                    <br> Activity_Head_Email (เก็บอีเมลของหัวหน้ากิจกรรม) เก็บด้วย varchar(100)
+                    <br>และ Activity_Head_Phone (เก็บเบอร์ของหัวหน้ากิจกรรม) เก็บด้วย varchar(20)
+                    <br>โดยมี Department_ID เป็น foreign key โดยที่จะทำเป็น Referential Constraint โดยสั่งให้ อ้างอิงจากตาราง department(เพื่อบอกว่าหัวหน้ากิจกรรมอยู่แผนกอะไร) โดยบอกว่าห้ามลบข้อมูลในตารางแม่(ตารางdepartment) หากยังมีข้อมูลในตารางลูก(ตารางactivity_head)อยู่ และให้อัพเดตข้อมูลในตารางลูกด้วย หากตารางแม่มีการแก้ไข
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/club.png" alt="ตาราง Club"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง club โดยประกอบไปด้วย Club_ID (เก็บรหัสของสโมสรนักศึกษา) เก็บด้วย varchar(20) และเป็น primary key
+                    <br> Club_Name (เก็บชื่อของสโมสรนักศึกษา) เก็บด้วย varchar(100)
+                    <br>และ Club_Email (เก็บอีเมลของสโมสรนักศึกษา) เก็บด้วย varchar(100)
+                    <br>โดยมี Faculty_ID และ Branch_ID เป็น foreign key โดยที่จะทำเป็น Referential Constraint โดยสั่งให้ อ้างอิงจากตาราง faculty(เพื่อบอกว่าสโมสรนักศึกษาคนนั้นๆอยู่คณะอะไร) และ branch(เพื่อบอกว่าสโมสรนักศึกษาคนนั้นๆอยู่สาขาอะไร) โดยบอกว่าห้ามลบข้อมูลในตารางแม่(ตารางfaculty,branch) หากยังมีข้อมูลในตารางลูก(ตารางclub)อยู่ และให้อัพเดตข้อมูลในตารางลูกด้วย หากตารางแม่มีการแก้ไข
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/activity.png" alt="ตาราง Activity"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง activity โดยประกอบไปด้วย Activity_ID (เก็บรหัสของกิจกรรม) เก็บด้วย varchar(20) และเป็น primary key
+                    <br> Activity_Name (เก็บชื่อของกิจกรรม) เก็บด้วย varchar(100)
+                    <br>Activity_Details (เก็บรายละเอียดของกิจกรรม) เก็บด้วย text
+                    <br>Academic_Year (เก็บปีการศึกษา) เก็บด้วย int(4)
+                    <br>Activity_Date (เก็บวันที่จัดกิจกรรม) เก็บด้วย data
+                    <br>Activity_Time (เก็บเวลาจัดกิจกรรม) เก็บด้วย time
+                    <br>Activity_Location (เก็บสถนาที่จัดกิจกรรม) เก็บด้วย varchar(100)
+                    <br>Maximum_Capacity (เก็บจำนวนผู้เข้าร่วมกิจกรรม) เก็บด้วย int(6)
+                    <br>และ Deadline (เก็บวันเวลาสุดท้ายที่เปิดรับลงทะเบียน) เก็บด้วย datetime
+                    <br>โดยมี Activity_Type_ID , Dean_ID และ Activity_Head_ID เป็น foreign key โดยที่จะทำเป็น Referential Constraint โดยสั่งให้ อ้างอิงจากตาราง activity_type(เพื่อแยกประเภทกกิจกรรม), dean(เพื่อบอกว่าใครเป็นคนอนุมัติกิจกรรม) และ Activity_Head_ID(เพื่อบอกว่าใครเป็นหัวหน้ากิจกรรมนั้นๆ) โดยบอกว่าห้ามลบข้อมูลในตารางแม่(ตารางactivity_type,dean,activity_head) หากยังมีข้อมูลในตารางลูก(ตารางactivity)อยู่ และให้อัพเดตข้อมูลในตารางลูกด้วย หากตารางแม่มีการแก้ไข
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/registration.png" alt="ตาราง Registration"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง registration โดยประกอบไปด้วย Registration_Date (เก็บวันเวลาที่กดลงทะเบียน) เก็บด้วย datetime
+                    <br>และ QR_Code_Stat (เก็บเลขqrcodeของการลงทะเบียน) เก็บด้วย varchar(100)
+                    <br>โดยมี Student_ID และ Activity_ID เป็นทั้ง primary key และ foreign key โดยทำหน้าที่เป็นตัวเชื่อมว่า นักศึกษาคนไหน ลงทะเบียนกิจกรรมนั้นๆไป โดยที่จะทำเป็น Referential Constraint โดยสั่งให้ อ้างอิงจากตาราง student และ activity โดยบอกว่าห้ามลบข้อมูลในตารางแม่(ตารางstudent,activity) หากยังมีข้อมูลในตารางลูก(ตารางregistration)อยู่ และให้อัพเดตข้อมูลในตารางลูกด้วย หากตารางแม่มีการแก้ไข
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-image">
+                <img src="pic/check_in.png" alt="ตาราง Check In"/>
+            </div>
+            <div class="section-content">
+                <p>ส่วนตรงนี้เป็นส่วนของตาราง check_in โดยประกอบไปด้วย CheckIn_Time (เก็บวันเวลาที่เข้าร่วมกิจกรรม) เก็บด้วย datetime
+                    <br>โดยมี Student_ID และ Activity_ID เป็นทั้ง primary key โดยทำหน้าที่เป็นตัวเชื่อมว่า นักศึกษาคนไหน ลงทะเบียนกิจกรรมนั้นๆไป โดยที่จะทำเป็น Referential Constraint โดยสั่งให้ อ้างอิงจากตาราง student และ activity โดยบอกว่าห้ามลบข้อมูลในตารางแม่(ตารางstudent,activity) หากยังมีข้อมูลในตารางลูก(ตารางcheck_in)อยู่ และให้อัพเดตข้อมูลในตารางลูกด้วย หากตารางแม่มีการแก้ไข
+                    <br>และมี Club_ID เป็น foreign key โดยที่จะทำเป็น Referential Constraint โดยสั่งให้ อ้างอิงจากตาราง club(เพื่อบอกได้ว่าสโมสรคนไหนสแกนให้) โดยบอกว่าห้ามลบข้อมูลในตารางแม่(ตารางclub) หากยังมีข้อมูลในตารางลูก(ตารางcheck_in)อยู่ และให้อัพเดตข้อมูลในตารางลูกด้วย หากตารางแม่มีการแก้ไข
+                </p>
+            </div>
+        </div>
+
+        <div class="gallery-section">
+            <h3>ตัวอย่างตอนนำไปลงในฐานข้อมูล</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="pic/DB.png" alt="DB"/></div>
+                <div class="gallery-item"><img src="pic/DB_activity.png" alt="DB Activity"/></div>
+                <div class="gallery-item"><img src="pic/DB_activity_head.png" alt="DB Activity Head"/></div>
+                <div class="gallery-item"><img src="pic/DB_activity_type.png" alt="DB Activity Type"/></div>
+                <div class="gallery-item"><img src="pic/DB_branch.png" alt="DB Branch"/></div>
+                <div class="gallery-item"><img src="pic/DB_check_in.png" alt="DB Check In"/></div>
+                <div class="gallery-item"><img src="pic/DB_club.png" alt="DB Club"/></div>
+                <div class="gallery-item"><img src="pic/DB_dean.png" alt="DB Dean"/></div>
+                <div class="gallery-item"><img src="pic/DB_department.png" alt="DB Department"/></div>
+                <div class="gallery-item"><img src="pic/DB_faculty.png" alt="DB Faculty"/></div>
+                <div class="gallery-item"><img src="pic/DB_registration.png" alt="DB Registration"/></div>
+                <div class="gallery-item"><img src="pic/DB_student.png" alt="DB Student"/></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
